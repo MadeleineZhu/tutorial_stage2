@@ -3,38 +3,66 @@ title: "response"
 author: "Madeleine Zhu"
 date: "04/02/2020"
 output: html_document
+
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
                       warning = FALSE,
                       message = FALSE)
+response <- read.table("response.txt", skip = 6, header = T)
+
 ```
 
 # Introduction
-
+The treatment sensitivity in arbitrary units increases as the concentration of glutathione
+increases.
 
 
 # Methods
+The data were modlled using an ANOVA model in the R language [gg_base] with R studio
+gsh effects sens
+```{r cars, echo=FALSE,}
+m <-mean(cars$dist)
+
+```
 
 
 
 # Results
+ 
+Increasing GSH significantly raises the sensityvity to treatment
+```{r cars, echo=FALSE, warning=FALSE, message=FALSE}
 
+library(tidyverse)
+plot <- ggplot(data = response,
+       aes(x = GSH, y = sens, col = genotype)) +
+  scale_colour_manual(values = viridis::viridis(3), name = "Genotype")+
+  geom_point() +
+  theme_classic()+
+  geom_smooth(method = "lm", se =FALSE)+
+  ylab("treatment sensitivity")+
+  theme_classic()+
+  theme(legend.position = c(0.25, 0.3), 
+        axis.title = element_text(size = 12),
+        axis.text = element_text(size = 10),
+        legend.text = element_text(size = 10),
+        legend.title = element_text(size = 10, vjust = -2),
+        legend.key.size = unit(0.005,"cm"),
+        axis.line = element_line(size = 1))+
+  scale_y_continuous(limits = c(0,35), expand = c(0,0))+
+  scale_x_continuous(limits = c(0,7), expand = c(0,0))
 
+ggsave("GSHvtreatment.tiff", plot = plot, width = 6.68, units = "cm", height = 6.68, dpi=300)
 
-
-
-```{r cars}
-m <-mean(cars$dist)
 ```
 
-The **mean** *distance* is `r m` and it is big. $p = \chi{2} and one half\ alp \frac{1}2$
+
 
 ```{r}
 
 ```
 
 
-gsh effects sens (d.f. = `r res$Df [1]`, `r res$df[3]`;)
+
 
